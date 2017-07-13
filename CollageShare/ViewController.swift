@@ -16,13 +16,13 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
         
         let touchedPoint = session.location(in: self.view)
         if let touchedImageView = self.view.hitTest(touchedPoint, with: nil) as? UIImageView {
-            let touchedImage = touchedImageView.image
-            
-            
+            if let touchedImage = touchedImageView.image {
+                let itemProvider = NSItemProvider(object: touchedImage)
+                let dragItem = UIDragItem(itemProvider: itemProvider)
+                
+                return [dragItem]
+            }
         }
-//        let itemProvider = NSItemProvider(object: <#T##NSItemProviderWriting#>)
-//        let dragItem = UIDragItem(itemProvider: <#T##NSItemProvider#>)
-        
         return []
     }
     
