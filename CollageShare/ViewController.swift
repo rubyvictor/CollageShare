@@ -11,7 +11,18 @@ import UIKit
 class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInteractionDelegate {
     
     // Implement methods that conform to UIDragInteractionDelegate
+    // This enables us to drag images from our app
     func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        
+        let touchedPoint = session.location(in: self.view)
+        if let touchedImageView = self.view.hitTest(touchedPoint, with: nil) as? UIImageView {
+            let touchedImage = touchedImageView.image
+            
+            
+        }
+//        let itemProvider = NSItemProvider(object: <#T##NSItemProviderWriting#>)
+//        let dragItem = UIDragItem(itemProvider: <#T##NSItemProvider#>)
+        
         return []
     }
     
@@ -26,7 +37,7 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
     
     // Implement 3 methods
     
-    // 3 To consume the image dragged and dropped, must create view and frame to contain it
+    // 3 To consume the image dropped into our app, must create view and frame to contain it
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         for dragItem in session.items {
             dragItem.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { (obj, error) in
@@ -39,7 +50,9 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
                 // Get back onto main thread
                 DispatchQueue.main.async {
                     let imageView = UIImageView(image: draggedImage)
+                    imageView.isUserInteractionEnabled = true
                     self.view.addSubview(imageView)
+                    
                     imageView.frame = CGRect(x: 0, y: 0, width: draggedImage.size.width, height: draggedImage.size.height)
                     
                     // Land image on location of mouse point
