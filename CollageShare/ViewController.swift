@@ -8,13 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIDropInteractionDelegate {
+class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInteractionDelegate {
+    
+    // Implement methods that conform to UIDragInteractionDelegate
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        return []
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Conform interaction to UIDropInteractionDelegate
         view.addInteraction(UIDropInteraction(delegate: self))
+        view.addInteraction(UIDragInteraction(delegate: self))
     }
     
     // Implement 3 methods
