@@ -49,6 +49,7 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
         // Conform interaction to UIDropInteractionDelegate
         view.addInteraction(UIDropInteraction(delegate: self))
         view.addInteraction(UIDragInteraction(delegate: self))
