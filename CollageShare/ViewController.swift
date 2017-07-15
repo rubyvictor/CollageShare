@@ -35,6 +35,11 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
         }
     }
     
+    // Handle cancel animation if stop lifting the dragItem object
+    func dragInteraction(_ interaction: UIDragInteraction, item: UIDragItem, willAnimateCancelWith animator: UIDragAnimating) {
+        self.view.addSubview(item.localObject as! UIView)
+    }
+    
     func dragInteraction(_ interaction: UIDragInteraction, previewForLifting item: UIDragItem, session: UIDragSession) -> UITargetedDragPreview? {
         
         // access dragItem.localObject and cast as non-Optional UIView object
