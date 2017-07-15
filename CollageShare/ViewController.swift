@@ -60,7 +60,21 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
     }
     
     @objc func handleShare() {
-        print("Sharing image")
+        
+        UIGraphicsBeginImageContext(view.frame.size)
+        
+        if let uiGraphicsContext = UIGraphicsGetCurrentContext() {
+            view.layer.render(in: uiGraphicsContext)
+        }
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        let activityViewController = UIActivityViewController(activityItems: [image as Any], applicationActivities: nil)
+//        activityViewController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        
+        present(activityViewController, animated: true, completion: nil)
+        
+        print("Sharing image..")
     }
     
     
