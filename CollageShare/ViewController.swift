@@ -19,13 +19,19 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
             if let touchedImage = touchedImageView.image {
                 let itemProvider = NSItemProvider(object: touchedImage)
                 let dragItem = UIDragItem(itemProvider: itemProvider)
-                
+                // This line gives an optional custom object associated with the drag activity.  Needed for access to dragItem in next method previewForLifting
+                dragItem.localObject = touchedImageView
                 return [dragItem]
             }
         }
         return []
     }
     
+    func dragInteraction(_ interaction: UIDragInteraction, previewForLifting item: UIDragItem, session: UIDragSession) -> UITargetedDragPreview? {
+        
+        // access dragItem.localObject and cast as UIView
+        return UITargetedDragPreview(view: item.localObject as! UIView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
