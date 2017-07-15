@@ -26,10 +26,18 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
         }
         return []
     }
+    // This method lifts the image without copying and remove it at original position
+    func dragInteraction(_ interaction: UIDragInteraction, willAnimateLiftWith animator: UIDragAnimating, session: UIDragSession) {
+        session.items.forEach { (dragItem) in
+            if let touchedImageView = dragItem.localObject as? UIView {
+                touchedImageView.removeFromSuperview()
+            }
+        }
+    }
     
     func dragInteraction(_ interaction: UIDragInteraction, previewForLifting item: UIDragItem, session: UIDragSession) -> UITargetedDragPreview? {
         
-        // access dragItem.localObject and cast as UIView
+        // access dragItem.localObject and cast as non-Optional UIView object
         return UITargetedDragPreview(view: item.localObject as! UIView)
     }
 
