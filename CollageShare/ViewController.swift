@@ -49,11 +49,20 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Collage Sharing"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(handleShare))
         view.backgroundColor = .white
+        
+        
         // Conform interaction to UIDropInteractionDelegate
         view.addInteraction(UIDropInteraction(delegate: self))
         view.addInteraction(UIDragInteraction(delegate: self))
     }
+    
+    @objc func handleShare() {
+        print("Sharing image")
+    }
+    
     
     // Implement 3 methods
     
