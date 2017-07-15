@@ -67,9 +67,9 @@ class ViewController: UIViewController, UIDropInteractionDelegate, UIDragInterac
             view.layer.render(in: uiGraphicsContext)
         }
         
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
         
-        let activityViewController = UIActivityViewController(activityItems: [image as Any], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
 //        activityViewController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         
         present(activityViewController, animated: true, completion: nil)
